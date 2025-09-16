@@ -1,0 +1,122 @@
+/* --- Team Section --- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 320px);
+  gap: 2rem;
+  justify-content: center;
+}
+
+.team-member-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.team-member-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.3s ease;
+}
+
+.team-member-card:hover .team-member-img {
+  filter: grayscale(0%);
+}
+
+.team-member-info {
+  padding: 1.5rem;
+}
+
+.team-member-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: var(--heading-color);
+}
+
+.team-member-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--text-color);
+}
+
+.team-member-info li {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+/* --- Features Section --- */
+.motivos {
+  display: flex;  
+  justify-content: center;
+  flex-direction: row;
+  width: 60rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.processos{
+  display: flex;  
+  justify-content: center;
+  flex-direction: row;
+  width: 80rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-title {
+  padding-top: 3rem;
+}
+
+.page-section{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.feature-block {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-block:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.feature-icon {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.feature-block h3 {
+  color: var(--heading-color);
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-block p {
+  font-size: 1rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
