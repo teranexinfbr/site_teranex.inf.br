@@ -1,8 +1,7 @@
 import React from 'react';
 import './home.css';
 import { TargetIcon, ZapIcon, UsersIcon, ClipboardIcon, MapIcon, PlayIcon, RepeatIcon } from '../global/icons';
-import suh from "../../src/fotos/suh.jpg";
-import eu from "../../src/fotos/eu.jpeg";
+import eu from "../../src/fotos/arthur.png";
 
 const TeamMember = ({ imageUrl, name, qualifications }) => (
   <div className="team-member-card">
@@ -21,17 +20,8 @@ const HomePage = () => {
     {
       name: "Arthur Jhonathas",
       imageUrl: eu,
-      qualifications: ["Gerente de Infraestrutura", "Técnico em Manutenção de Hardware", "Bacharel em Engenharia da Computação"]
+      qualifications: ["Técnico em Manutenção de Hardware", "Estudante de Engenharia da Computação"]
     },
-    // {
-    //   name: "Suellen Miranda",
-    //   imageUrl: suh,
-    //   qualifications: ["Gerente de Projetos", "Dev FullStack", "Bacharel em Ciencia da Computação"]
-    // },
-    // {
-    //   name: "Henrique Carnaúba",
-    //   qualifications: ["Gerente de Infraestrutura", "Monobola","Bacharel em Engenharia da Computação"]
-    // }
   ];
 
   const featuresData = [
@@ -109,7 +99,7 @@ const HomePage = () => {
       </section>
 
       <section className="page-section">
-        <h2 className="section-title">Nossa Equipe de Especialistas</h2>
+        <h2 className="section-title">Nossa Equipe</h2>
         <div className="team-grid">
           {teamData.map((member, index) => (
             <TeamMember

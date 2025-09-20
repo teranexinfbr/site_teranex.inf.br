@@ -5,19 +5,16 @@ import logo from "../../src/logos/LOGOTNX.png"
 const Header = () => {
   return (
     <nav className="navbar">
-      <div className="nav-left">
-        <img src={logo} className='nav-image' alt="Logo TeraNex"></img>
-        <Link to="/" className="nav-brand">
-          Tera<span>Nex</span>
-        </Link>
-      </div>
+       <img src={logo} className='nav-image'></img>
+      <Link to="/" className="nav-brand">
+        Tera<span>Nex</span>
+      </Link>
       <ul className="nav-links">
         <li><NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Início</NavLink></li>
         <li><NavLink to="/servicos" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Serviços</NavLink></li>
         <li><NavLink to="/contato" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Contato</NavLink></li>
       </ul>
-      <div className='nav-vazia'>
-      </div>
+      <div></div>
     </nav>
   );
 };

@@ -29,11 +29,11 @@ const ContactPage = () => {
           <h3 className="section-title" style={{textAlign: 'left', fontSize: '1.8rem'}}>Nossos Canais</h3>
           <div className="contact-info-item">
             <MailIcon />
-            <a href="mailto:contato@arthlabs.inf.br">contato@arthlabs.inf.br</a>
+            <a href="mailto:contato@teranex.inf.br">contato@teranex.inf.br</a>
           </div>
           <div className="contact-info-item">
             <InstagramIcon />
-            <a href="https://instagram.com/teranexinfo" target="_blank" rel="noopener noreferrer">@teranexinfo</a>
+            <a href="https://instagram.com/teranexinfbr" target="_blank" rel="noopener noreferrer">@teranexinfbr</a>
           </div>
           <div className="contact-info-item">
             <PhoneIcon />

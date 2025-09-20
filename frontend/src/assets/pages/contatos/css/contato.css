@@ -8,6 +8,8 @@
   border-radius: 12px;
   border: 1px solid var(--border-color);
   margin: auto;
+  margin-bottom: 3rem;
+  width: 70rem;
 }
 
 @media (min-width: 992px) {
