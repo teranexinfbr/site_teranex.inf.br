@@ -62,7 +62,7 @@ const ServicesPage = () => {
         {
             icon: <EndpointIcon />,
             title: "Proteção de Endpoints",
-            description: "Defesa avançada para computadores contra malwares e ransomwares."
+            description: "Proteção contra ameaças digitais e softwares maliciosos."
         },
         {
             icon: <DocsIcon />,
