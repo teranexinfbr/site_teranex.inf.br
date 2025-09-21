@@ -1,50 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './css/contato.css';
 import { MailIcon, PhoneIcon, InstagramIcon } from '../global/icons';
 
 const ContactPage = () => {
-  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setIsSubmitting(true);
-    setFormStatus({ type: '', message: '' });
-
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-
-    try {
-      // URL do backend PHP - ajuste conforme necessário
-      const response = await fetch('http://teranex.inf.br/enviar_mensagem.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setFormStatus({ type: 'success', message: result.mensagem });
-        event.target.reset();
-      } else {
-        setFormStatus({ type: 'error', message: result.mensagem || 'Ocorreu um erro no servidor.' });
-      }
-    } catch (error) {
-      console.error('Erro ao enviar formulário:', error);
-      setFormStatus({ type: 'error', message: 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.' });
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log("Dados do formulário:", data);
+    const submitBtn = event.target.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Enviado!';
+    submitBtn.disabled = true;
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }, 2500);
+    event.target.reset();
   };
 
   return (
     <div>
       <h1 className="page-title">Entre em Contato</h1>
       <p className="page-subtitle">Estamos prontos para ajudar. Utilize um dos canais abaixo ou preencha o formulário e retornaremos em breve.</p>
-
+      
       <div className="contact-container">
         <div className="contact-info">
           <h3 className="section-title" style={{textAlign: 'left', fontSize: '1.8rem'}}>Nossos Canais</h3>
@@ -81,14 +60,7 @@ const ContactPage = () => {
               <label htmlFor="descricao">Como podemos ajudar?</label>
               <textarea id="descricao" name="descricao" rows="5" required></textarea>
             </div>
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>
-              {isSubmitting ? 'Enviando...' : 'Enviar'}
-            </button>
-            {formStatus.message && (
-              <div className={`form-status ${formStatus.type}`}>
-                {formStatus.message}
-              </div>
-            )}
+            <button type="submit" className="submit-btn">Enviar</button>
           </form>
         </div>
       </div>

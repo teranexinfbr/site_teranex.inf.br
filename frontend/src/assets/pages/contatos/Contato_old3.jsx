@@ -15,7 +15,7 @@ const ContactPage = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // URL do backend PHP - ajuste conforme necessário
+      // URL do backend PHP - versão de teste
       const response = await fetch('http://teranex.inf.br/enviar_mensagem.php', {
         method: 'POST',
         headers: {
@@ -34,7 +34,7 @@ const ContactPage = () => {
       }
     } catch (error) {
       console.error('Erro ao enviar formulário:', error);
-      setFormStatus({ type: 'error', message: 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.' });
+      setFormStatus({ type: 'error', message: 'Não foi possível conectar ao servidor.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -42,8 +42,12 @@ const ContactPage = () => {
 
   return (
     <div>
-      <h1 className="page-title">Entre em Contato</h1>
-      <p className="page-subtitle">Estamos prontos para ajudar. Utilize um dos canais abaixo ou preencha o formulário e retornaremos em breve.</p>
+      <h1 className="page-title">Entre em Contato (Teste Final)</h1>
+      <p className="page-subtitle">
+        ✅ Formulário funcional em modo de teste.
+        <br />
+        📧 Emails são salvos em arquivo de log (não enviados realmente).
+      </p>
 
       <div className="contact-container">
         <div className="contact-info">

@@ -89,28 +89,3 @@
   background-color: #33c6ff;
   transform: translateY(-3px);
 }
-
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.form-status {
-  margin-top: 1rem;
-  text-align: center;
-  font-weight: 500;
-  padding: 0.8rem;
-  border-radius: 8px;
-}
-
-.form-status.success {
-  background-color: rgba(40, 167, 69, 0.2);
-  color: #28a745;
-  border: 1px solid #28a745;
-}
-
-.form-status.error {
-  background-color: rgba(220, 53, 69, 0.2);
-  color: #dc3545;
-  border: 1px solid #dc3545;
-}
