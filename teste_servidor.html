@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Servidor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { color: green; }
+        .error { color: red; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover { background: #0056b3; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste do Servidor Local</h1>
+        <p><strong>Status do Servidor:</strong> <span id="serverStatus">Verificando...</span></p>
+
+        <h2>📧 Teste do Formulário de Contato</h2>
+        <form id="contactForm">
+            <div>
+                <label>Nome:</label><br>
+                <input type="text" name="nome" required style="width: 100%; padding: 8px; margin: 5px 0;">
+            </div>
+            <div>
+                <label>Email:</label><br>
+                <input type="email" name="email" required style="width: 100%; padding: 8px; margin: 5px 0;">
+            </div>
+            <div>
+                <label>Telefone:</label><br>
+                <input type="tel" name="telefone" style="width: 100%; padding: 8px; margin: 5px 0;">
+            </div>
+            <div>
+                <label>Mensagem:</label><br>
+                <textarea name="descricao" required rows="4" style="width: 100%; padding: 8px; margin: 5px 0;"></textarea>
+            </div>
+            <button type="submit">Enviar Teste</button>
+        </form>
+
+        <div id="result"></div>
+
+        <h2>🔍 Debug Information</h2>
+        <div id="debugInfo"></div>
+    </div>
+
+    <script>
+        // Verificar status do servidor
+        fetch('http://localhost:8000/backend/enviar_mensagem.php', {
+            method: 'OPTIONS'
+        })
+        .then(response => {
+            document.getElementById('serverStatus').innerHTML = '<span class="success">✅ Servidor rodando na porta 8000</span>';
+        })
+        .catch(error => {
+            document.getElementById('serverStatus').innerHTML = '<span class="error">❌ Servidor não encontrado na porta 8000</span>';
+            document.getElementById('debugInfo').innerHTML = '<p>Erro: ' + error.message + '</p>';
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<p>Enviando...</p>';
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('http://localhost:8000/backend/enviar_mensagem.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="success"><strong>Sucesso:</strong> ' + result.mensagem + '</div>';
+                    this.reset();
+                } else {
+                    resultDiv.innerHTML = '<div class="error"><strong>Erro:</strong> ' + result.mensagem + '</div>';
+                }
+
+                // Debug info
+                document.getElementById('debugInfo').innerHTML = `
+                    <h3>Debug Info:</h3>
+                    <p><strong>Status:</strong> ${response.status}</p>
+                    <p><strong>Response:</strong></p>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>
+                    <p><strong>Data sent:</strong></p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error"><strong>Erro de conexão:</strong> ' + error.message + '</div>';
+                document.getElementById('debugInfo').innerHTML = '<p>Erro: ' + error.message + '</p>';
+            }
+        });
+    </script>
+</body>
+</html>
