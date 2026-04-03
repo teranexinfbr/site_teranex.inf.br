@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Formulário de Contato - TeraNex</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f1f5f9;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #334155;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        button:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .success {
+            background-color: #dcfce7;
+            border: 1px solid #16a34a;
+            color: #15803d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .error {
+            background-color: #fef2f2;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info {
+            background-color: #dbeafe;
+            border: 1px solid #2563eb;
+            color: #1d4ed8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Teste do Formulário de Contato</h1>
+        <p class="info">
+            <strong>Instruções:</strong> Este é um arquivo de teste para verificar se o PHP de envio de mensagens está funcionando corretamente. 
+            Preencha o formulário e clique em enviar para testar.
+        </p>
+        
+        <div id="message"></div>
+        
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Nome Completo *</label>
+                <input type="text" id="name" name="name" required placeholder="Seu nome completo">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Seu Email *</label>
+                <input type="email" id="email" name="email" required placeholder="voce@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Assunto *</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Selecione um assunto</option>
+                    <option>Desenvolvimento de Software / Apps</option>
+                    <option>Serviço de Infraestrutura</option>
+                    <option>Serviços de Cloud</option>
+                    <option>Suporte Técnico Local</option>
+                    <option>Suporte Técnico Remoto</option>
+                    <option>Parcerias</option>
+                    <option>Outro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Mensagem *</label>
+                <textarea id="message_text" name="message" required rows="4" placeholder="Como podemos ajudar?"></textarea>
+            </div>
+            
+            <button type="submit" id="submitBtn">Enviar Mensagem</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            const originalText = submitBtn.textContent;
+            
+            // Reset message
+            messageDiv.innerHTML = '';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('/send_contact.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    messageDiv.innerHTML = '<div class="success">✅ Mensagem enviada com sucesso! Verifique o email de destino.</div>';
+                    this.reset();
+                } else {
+                    messageDiv.innerHTML = `<div class="error">❌ Erro: ${result.message}</div>`;
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="error">❌ Erro de conexão. Verifique se o servidor PHP está funcionando.</div>';
+            }
+            
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        });
+    </script>
+</body>
+</html>
