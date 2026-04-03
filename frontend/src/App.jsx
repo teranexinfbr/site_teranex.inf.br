@@ -1,25 +1,30 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./assets/pages/home/Home";
-import Contato from './assets/pages/contatos/Contato';
-import Servicos from "./assets/pages/servicos/Servicos";
-import Header from "./assets/pages/global/Header";
-import Footer from "./assets/pages/global/Footer";
-import './assets/pages/global/global.css';
-
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import Team from './pages/Team';
+import ServiceDetail from './pages/ServiceDetail';
+import Contact from './pages/Contact';
+import Certifications from './pages/Certifications';
+import Services from './pages/Services';
+import Projects from './pages/Projects';
+import About from './pages/About';
+import FAQ from './pages/FAQ';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <main className="main-site">
-        <Routes>
-          <Route path="/" element={ <Home />} />
-          <Route path="/contato" element={ <Contato />} />
-          <Route path="/servicos" element={ <Servicos />} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="sobre" element={<About />} />
+        <Route path="equipe" element={<Team />} />
+        <Route path="contato" element={<Contact />} />
+        <Route path="faq" element={<FAQ />} />
+        <Route path="servicos/:type" element={<ServiceDetail />} />
+        <Route path="nossos-projetos" element={<Projects />} />
+        <Route path="certificacoes" element={<Certifications />} />
+        <Route path="servicos" element={<Services />} />
+      </Route>
+    </Routes>
   );
 }
 
