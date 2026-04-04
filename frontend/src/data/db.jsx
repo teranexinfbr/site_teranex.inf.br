@@ -133,7 +133,7 @@ export const teamMembers = [
       email: 'mailto:arthur.lima@teranex.inf.br',
     },
   },
-/*   {
+   {
     name: 'Luiz Henrique',
     role: 'CTO & Lead Engineer',
     bio: 'Lidera a engenharia de aplicacoes, redes e seguranca da informacao, buscando solucoes resilientes e bem estruturadas.',
@@ -144,7 +144,7 @@ export const teamMembers = [
       instagram: 'https://www.instagram.com/_ricomnd',
       email: 'mailto:henrique.carnauba@teranex.inf.br',
     },
-  }, */
+  }, 
 /*   {
     name: 'Maryana Raphaely',
     role: 'QA Engineer',
