@@ -3,7 +3,7 @@ name: Deploy Site TeraNex
 on:
   push:
     branches:
-      - prod
+      - main
     paths:
       - 'frontend/**'
 
